@@ -1,0 +1,40 @@
+# Node.js
+/node_modules/
+/npm-debug.log
+/yarn-error.log
+
+# Laravel 4 specific
+/bootstrap/compiled.php
+/app/storage/
+
+# Laravel 5 & Lumen specific
+/public/storage
+/public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+/public_html/storage
+/public_html/hot
+
+# Environment and sensitive files
+/.env
+/Homestead.yaml
+/Homestead.json
+/.vagrant
+
+# PHP Unit
+.phpunit.result.cache
+
+# Laravel package dependencies
+/vendor/
+
+# Storage and sensitive data
+/storage/*.key
+
+# Other files to ignore
+.idea/
+*.log
+*.bak
+*.swp
+.ftpquota
+
+/storage/framework/views/*
