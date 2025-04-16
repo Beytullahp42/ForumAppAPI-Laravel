@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -20,6 +21,19 @@ class PostController extends Controller
         }
         return response()->json($post);
     }
+
+    public function getPostsByUser($userid)
+    {    $user = User::find($userid);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $posts = $user->posts()->with('user')->get();
+
+        return response()->json($posts);
+    }
+
 
     public function create(Request $request)
     {
