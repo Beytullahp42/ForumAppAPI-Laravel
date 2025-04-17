@@ -87,13 +87,21 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $request->validate([
+            'password' => 'required|string',
+        ]);
         $user = Auth::user();
         if (!$user) {
             return response()->json([
                 'message' => 'User not found'
             ], 404);
+        }
+        if (!Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => 'Incorrect password'
+            ], 403);
         }
         $user->delete();
         return response()->json([
@@ -125,7 +133,6 @@ class UserController extends Controller
             'message' => 'Password changed successfully.',
         ]);
     }
-
 
 
 }
