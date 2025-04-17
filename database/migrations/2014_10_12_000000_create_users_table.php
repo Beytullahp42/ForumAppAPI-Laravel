@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             // other columns...
-            $table->string('profile_picture')->default('😉');
+            $table->string('profile_picture')->default('😉&white');
             $table->timestamps();
         });
 
