@@ -29,7 +29,15 @@ class PostController extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $posts = $user->posts()->with('user')->get();
+        $posts = $user->posts()->with('user')->paginate(10);
+
+        return response()->json($posts);
+    }
+
+    public function getPostsByAuthenticatedUser()
+    {
+        $user = auth()->user();
+        $posts = $user->posts()->with('user')->paginate(10);
 
         return response()->json($posts);
     }

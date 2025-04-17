@@ -74,10 +74,12 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'profile_picture' => 'required'
         ]);
         $user->update([
             'name' => $request->name,
-            'email' => $request->email
+            'email' => $request->email,
+            'profile_picture' => $request->profile_picture
         ]);
         return response()->json([
             'success' => true,
