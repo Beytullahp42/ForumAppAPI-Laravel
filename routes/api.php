@@ -14,7 +14,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/login', function () {
-    return response()->json('Please login');
+    return response()->json(
+        [
+            'message' => 'Please provide your credentials to log in.'
+        ],
+        401
+    );
 })->name('login');
 
 

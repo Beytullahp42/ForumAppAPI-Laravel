@@ -8,8 +8,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(){
-        $posts = Post::with(['user'])->paginate(10);
+    public function index()
+    {
+        $posts = Post::with(['user'])->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($posts);
     }
 
@@ -23,13 +24,14 @@ class PostController extends Controller
     }
 
     public function getPostsByUser($userid)
-    {    $user = User::find($userid);
+    {
+        $user = User::find($userid);
 
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        $posts = $user->posts()->with('user')->paginate(10);
+        $posts = $user->posts()->with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json($posts);
     }
@@ -37,7 +39,8 @@ class PostController extends Controller
     public function getPostsByAuthenticatedUser()
     {
         $user = auth()->user();
-        $posts = $user->posts()->with('user')->paginate(10);
+
+        $posts = $user->posts()->with('user')->orderBy('created_at', 'desc')->paginate(10);
 
         return response()->json($posts);
     }

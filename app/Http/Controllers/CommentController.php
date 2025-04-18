@@ -14,7 +14,12 @@ class CommentController extends Controller
         if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
-        $comments = $post->comments()->with('user')->get();
+
+        $comments = Comment::where('post_id', $postId)
+            ->with(['user'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
         return response()->json($comments);
     }
 
