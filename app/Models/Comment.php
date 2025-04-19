@@ -10,7 +10,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = ['p_content', 'post_id', 'user_id'];
-    protected $appends = ['like_count', 'dislike_count'];
+    protected $appends = ['like_count', 'dislike_count', 'is_liked', 'is_disliked'];
 
     public function post()
     {
@@ -33,5 +33,15 @@ class Comment extends Model
 
     public function getDislikeCountAttribute() {
         return $this->votes()->where('vote_type', 'dislike')->count();
+    }
+
+    public function getIsLikedAttribute()
+    {
+        return $this->votes()->where('user_id', auth()->id())->where('vote_type', 'like')->exists();
+    }
+
+    public function getIsDislikedAttribute()
+    {
+        return $this->votes()->where('user_id', auth()->id())->where('vote_type', 'dislike')->exists();
     }
 }
