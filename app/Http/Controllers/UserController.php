@@ -74,25 +74,12 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'profile_picture' => 'string',
         ]);
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-        ]);
-        return response()->json([
-            'success' => true,
-            'user' => $user
-        ]);
-    }
-
-    public function changeProfilePicture(Request $request)
-    {
-        $user = Auth::user();
-        $request->validate([
-            'profile_picture' => 'required|string',
-        ]);
-        $user->update([
-           'profile_picture' => $request->profile_picture,
+            'profile_picture' => $request->profile_picture,
         ]);
         return response()->json([
             'success' => true,
