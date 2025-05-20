@@ -12,6 +12,17 @@ class Comment extends Model
     protected $fillable = ['p_content', 'post_id', 'user_id'];
     protected $appends = ['like_count', 'dislike_count', 'is_liked', 'is_disliked'];
 
+    protected $casts = [
+        'id' => 'integer',
+        'post_id' => 'integer',
+        'user_id' => 'integer',
+        'like_count' => 'integer',
+        'dislike_count' => 'integer',
+        'is_liked' => 'boolean',
+        'is_disliked' => 'boolean',
+        'p_content' => 'string',
+    ];
+
     public function post()
     {
         return $this->belongsTo(Post::class);
