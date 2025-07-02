@@ -70,20 +70,28 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = auth()->user();
+
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'profile_picture' => 'string',
+            'name' => 'required|string|max:255',
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
+            'profile_picture' => 'nullable|string',
         ]);
-        $user->update([
+
+        $data = [
             'name' => $request->name,
-            'email' => $request->email,
             'profile_picture' => $request->profile_picture,
-        ]);
+        ];
+
+        if ($request->filled('email')) {
+            $data['email'] = $request->email;
+        }
+
+        $user->update($data);
+
         return response()->json([
             'success' => true,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
