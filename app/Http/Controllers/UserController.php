@@ -49,7 +49,7 @@ class UserController extends Controller
 
     public function get()
     {
-        $user = Auth::user();
+        $user = Auth::user()->makeVisible('email');
         return response()->json([
             'user' => $user,
         ]);
