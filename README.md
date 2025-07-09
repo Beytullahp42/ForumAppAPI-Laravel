@@ -3,4 +3,4 @@ This is a forum app backend API built with Laravel 11 and Sanctum for authentica
 
 Flutter app: https://github.com/Beytullahp42/ForumApp-Flutter
 
-Flutter web app: https://beytullahpaytar.xyz
+Flutter web app: https://forum-app-flutter-web.vercel.app/

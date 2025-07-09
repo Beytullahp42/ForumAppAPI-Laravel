@@ -13,6 +13,10 @@
 <div class="text-center">
     <h1 class="fw-bold">Forum App Backend</h1>
     <p class="lead">This is the backend for my mobile app project. There is no UI here, only APIs :)</p>
+    <p class="mt-4 text-muted">
+        To check out the <strong>Flutter Web App</strong>, visit
+        <a href="https://forum-app-flutter-web.vercel.app/" class="link-primary">https://forum-app-flutter-web.vercel.app/</a>
+    </p>
 </div>
 
 </body>
