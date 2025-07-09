@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,7 @@ class UserController extends Controller
         return $this->login($request);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json([
@@ -47,7 +48,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function get()
+    public function get(): JsonResponse
     {
         $user = Auth::user()->makeVisible('email');
         return response()->json([
@@ -55,7 +56,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function getUserById($id)
+    public function getUserById($id): JsonResponse
     {
         $user = User::find($id);
         if (!$user) {
@@ -68,7 +69,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): JsonResponse
     {
         $user = auth()->user();
 
